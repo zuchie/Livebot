@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5364AD5E5E3CEDE6539A60B4 /* Pods_LivebotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2553E3E5A284A410BB70BEB0 /* Pods_LivebotTests.framework */; };
+		850E8F3A4F29E3603FA52ACC /* Pods_Livebot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9861F37F88470742AE6021D6 /* Pods_Livebot.framework */; };
 		B994C6C81F398FA900050FD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6C71F398FA900050FD3 /* AppDelegate.swift */; };
 		B994C6CA1F398FA900050FD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6C91F398FA900050FD3 /* ViewController.swift */; };
 		B994C6CD1F398FA900050FD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B994C6CB1F398FA900050FD3 /* Main.storyboard */; };
@@ -34,6 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2553E3E5A284A410BB70BEB0 /* Pods_LivebotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivebotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B9694A466B14FC0617453F /* Pods-LivebotTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivebotTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests.release.xcconfig"; sourceTree = "<group>"; };
+		6827F012E39EC1B2F1BD2823 /* Pods-Livebot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Livebot.release.xcconfig"; path = "Pods/Target Support Files/Pods-Livebot/Pods-Livebot.release.xcconfig"; sourceTree = "<group>"; };
+		9861F37F88470742AE6021D6 /* Pods_Livebot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Livebot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD6336AA8C290576257D3752 /* Pods-Livebot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Livebot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Livebot/Pods-Livebot.debug.xcconfig"; sourceTree = "<group>"; };
 		B994C6C41F398FA900050FD3 /* Livebot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Livebot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B994C6C71F398FA900050FD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B994C6C91F398FA900050FD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +54,7 @@
 		B994C6E31F398FA900050FD3 /* LivebotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivebotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B994C6E71F398FA900050FD3 /* LivebotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivebotUITests.swift; sourceTree = "<group>"; };
 		B994C6E91F398FA900050FD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB6D8912043C050796B145DF /* Pods-LivebotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivebotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				850E8F3A4F29E3603FA52ACC /* Pods_Livebot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5364AD5E5E3CEDE6539A60B4 /* Pods_LivebotTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A7D01D6C6EB9F5353833743 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9861F37F88470742AE6021D6 /* Pods_Livebot.framework */,
+				2553E3E5A284A410BB70BEB0 /* Pods_LivebotTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B994C6BB1F398FA900050FD3 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +100,8 @@
 				B994C6DB1F398FA900050FD3 /* LivebotTests */,
 				B994C6E61F398FA900050FD3 /* LivebotUITests */,
 				B994C6C51F398FA900050FD3 /* Products */,
+				C5153B3B03D66B3E9686CC31 /* Pods */,
+				5A7D01D6C6EB9F5353833743 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +146,17 @@
 			path = LivebotUITests;
 			sourceTree = "<group>";
 		};
+		C5153B3B03D66B3E9686CC31 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AD6336AA8C290576257D3752 /* Pods-Livebot.debug.xcconfig */,
+				6827F012E39EC1B2F1BD2823 /* Pods-Livebot.release.xcconfig */,
+				FB6D8912043C050796B145DF /* Pods-LivebotTests.debug.xcconfig */,
+				38B9694A466B14FC0617453F /* Pods-LivebotTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +164,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B994C6EC1F398FA900050FD3 /* Build configuration list for PBXNativeTarget "Livebot" */;
 			buildPhases = (
+				A3CB318EE46FDA314238B89C /* [CP] Check Pods Manifest.lock */,
 				B994C6C01F398FA900050FD3 /* Sources */,
 				B994C6C11F398FA900050FD3 /* Frameworks */,
 				B994C6C21F398FA900050FD3 /* Resources */,
+				F646400574BB89481BFBF307 /* [CP] Embed Pods Frameworks */,
+				82ADB6FC5EBE5BED8C55881F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +184,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B994C6EF1F398FA900050FD3 /* Build configuration list for PBXNativeTarget "LivebotTests" */;
 			buildPhases = (
+				38CCACAC19DD93F31B45A695 /* [CP] Check Pods Manifest.lock */,
 				B994C6D41F398FA900050FD3 /* Sources */,
 				B994C6D51F398FA900050FD3 /* Frameworks */,
 				B994C6D61F398FA900050FD3 /* Resources */,
+				DF04D9E58EA210C842989F29 /* [CP] Embed Pods Frameworks */,
+				F0DB085967CE7A06A02EBD1D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,6 +294,155 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		38CCACAC19DD93F31B45A695 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LivebotTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82ADB6FC5EBE5BED8C55881F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Livebot/Pods-Livebot-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3CB318EE46FDA314238B89C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Livebot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF04D9E58EA210C842989F29 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AI/AI.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxNimble/RxNimble.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxNimble.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0DB085967CE7A06A02EBD1D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F646400574BB89481BFBF307 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Livebot/Pods-Livebot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AI/AI.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Unbox/Unbox.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Unbox.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Livebot/Pods-Livebot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B994C6C01F398FA900050FD3 /* Sources */ = {
@@ -415,6 +602,7 @@
 		};
 		B994C6ED1F398FA900050FD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD6336AA8C290576257D3752 /* Pods-Livebot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TYA2375JGG;
@@ -428,6 +616,7 @@
 		};
 		B994C6EE1F398FA900050FD3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6827F012E39EC1B2F1BD2823 /* Pods-Livebot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TYA2375JGG;
@@ -441,8 +630,9 @@
 		};
 		B994C6F01F398FA900050FD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB6D8912043C050796B145DF /* Pods-LivebotTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = TYA2375JGG;
 				INFOPLIST_FILE = LivebotTests/Info.plist;
@@ -456,8 +646,9 @@
 		};
 		B994C6F11F398FA900050FD3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38B9694A466B14FC0617453F /* Pods-LivebotTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = TYA2375JGG;
 				INFOPLIST_FILE = LivebotTests/Info.plist;
@@ -516,6 +707,7 @@
 				B994C6EE1F398FA900050FD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B994C6EF1F398FA900050FD3 /* Build configuration list for PBXNativeTarget "LivebotTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +716,7 @@
 				B994C6F11F398FA900050FD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B994C6F21F398FA900050FD3 /* Build configuration list for PBXNativeTarget "LivebotUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +725,7 @@
 				B994C6F41F398FA900050FD3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
