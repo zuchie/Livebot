@@ -10,12 +10,24 @@
 		5364AD5E5E3CEDE6539A60B4 /* Pods_LivebotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2553E3E5A284A410BB70BEB0 /* Pods_LivebotTests.framework */; };
 		850E8F3A4F29E3603FA52ACC /* Pods_Livebot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9861F37F88470742AE6021D6 /* Pods_Livebot.framework */; };
 		B994C6C81F398FA900050FD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6C71F398FA900050FD3 /* AppDelegate.swift */; };
-		B994C6CA1F398FA900050FD3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6C91F398FA900050FD3 /* ViewController.swift */; };
+		B994C6CA1F398FA900050FD3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6C91F398FA900050FD3 /* ChatViewController.swift */; };
 		B994C6CD1F398FA900050FD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B994C6CB1F398FA900050FD3 /* Main.storyboard */; };
 		B994C6CF1F398FA900050FD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B994C6CE1F398FA900050FD3 /* Assets.xcassets */; };
 		B994C6D21F398FA900050FD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B994C6D01F398FA900050FD3 /* LaunchScreen.storyboard */; };
 		B994C6DD1F398FA900050FD3 /* LivebotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6DC1F398FA900050FD3 /* LivebotTests.swift */; };
 		B994C6E81F398FA900050FD3 /* LivebotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6E71F398FA900050FD3 /* LivebotUITests.swift */; };
+		B9C8D1B21F5F856B003EA5C4 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */; };
+		B9C8D1B51F5F9BF8003EA5C4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B41F5F9BF8003EA5C4 /* Message.swift */; };
+		B9C8D1B81F5F9D5C003EA5C4 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B71F5F9D5C003EA5C4 /* MessageService.swift */; };
+		B9C8D1BA1F5F9E75003EA5C4 /* Bot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B91F5F9E75003EA5C4 /* Bot.swift */; };
+		B9C8D1BC1F5FA1C6003EA5C4 /* MessageServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1BB1F5FA1C6003EA5C4 /* MessageServiceType.swift */; };
+		B9C8D1BF1F5FBA13003EA5C4 /* ApiaiAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1BE1F5FBA13003EA5C4 /* ApiaiAPI.swift */; };
+		B9C8D1C11F5FE453003EA5C4 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */; };
+		B9C8D1C41F5FEAB6003EA5C4 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C31F5FEAB6003EA5C4 /* Scene.swift */; };
+		B9C8D1C61F5FEAED003EA5C4 /* Scene+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C51F5FEAED003EA5C4 /* Scene+ViewController.swift */; };
+		B9C8D1C81F5FED0F003EA5C4 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C71F5FED0F003EA5C4 /* SceneCoordinator.swift */; };
+		B9C8D1CA1F5FED30003EA5C4 /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C91F5FED30003EA5C4 /* SceneCoordinatorType.swift */; };
+		B9C8D1CC1F5FED53003EA5C4 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1CB1F5FED53003EA5C4 /* SceneTransitionType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +55,7 @@
 		AD6336AA8C290576257D3752 /* Pods-Livebot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Livebot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Livebot/Pods-Livebot.debug.xcconfig"; sourceTree = "<group>"; };
 		B994C6C41F398FA900050FD3 /* Livebot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Livebot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B994C6C71F398FA900050FD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B994C6C91F398FA900050FD3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B994C6C91F398FA900050FD3 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		B994C6CC1F398FA900050FD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B994C6CE1F398FA900050FD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B994C6D11F398FA900050FD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +66,18 @@
 		B994C6E31F398FA900050FD3 /* LivebotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivebotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B994C6E71F398FA900050FD3 /* LivebotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivebotUITests.swift; sourceTree = "<group>"; };
 		B994C6E91F398FA900050FD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		B9C8D1B41F5F9BF8003EA5C4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		B9C8D1B71F5F9D5C003EA5C4 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		B9C8D1B91F5F9E75003EA5C4 /* Bot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bot.swift; sourceTree = "<group>"; };
+		B9C8D1BB1F5FA1C6003EA5C4 /* MessageServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageServiceType.swift; sourceTree = "<group>"; };
+		B9C8D1BE1F5FBA13003EA5C4 /* ApiaiAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiaiAPI.swift; sourceTree = "<group>"; };
+		B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
+		B9C8D1C31F5FEAB6003EA5C4 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		B9C8D1C51F5FEAED003EA5C4 /* Scene+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scene+ViewController.swift"; sourceTree = "<group>"; };
+		B9C8D1C71F5FED0F003EA5C4 /* SceneCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
+		B9C8D1C91F5FED30003EA5C4 /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
+		B9C8D1CB1F5FED53003EA5C4 /* SceneTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
 		FB6D8912043C050796B145DF /* Pods-LivebotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivebotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,8 +142,12 @@
 		B994C6C61F398FA900050FD3 /* Livebot */ = {
 			isa = PBXGroup;
 			children = (
+				B9C8D1C21F5FEAA2003EA5C4 /* Scenes */,
+				B9C8D1BD1F5FB9F2003EA5C4 /* ApiaiAPI */,
+				B9C8D1B61F5F9D48003EA5C4 /* Services */,
+				B9C8D1B31F5F9BD6003EA5C4 /* Models */,
+				B9C8D1B01F5F7961003EA5C4 /* Controllers */,
 				B994C6C71F398FA900050FD3 /* AppDelegate.swift */,
-				B994C6C91F398FA900050FD3 /* ViewController.swift */,
 				B994C6CB1F398FA900050FD3 /* Main.storyboard */,
 				B994C6CE1F398FA900050FD3 /* Assets.xcassets */,
 				B994C6D01F398FA900050FD3 /* LaunchScreen.storyboard */,
@@ -144,6 +172,54 @@
 				B994C6E91F398FA900050FD3 /* Info.plist */,
 			);
 			path = LivebotUITests;
+			sourceTree = "<group>";
+		};
+		B9C8D1B01F5F7961003EA5C4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B994C6C91F398FA900050FD3 /* ChatViewController.swift */,
+				B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		B9C8D1B31F5F9BD6003EA5C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B9C8D1B41F5F9BF8003EA5C4 /* Message.swift */,
+				B9C8D1B91F5F9E75003EA5C4 /* Bot.swift */,
+				B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		B9C8D1B61F5F9D48003EA5C4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B9C8D1B71F5F9D5C003EA5C4 /* MessageService.swift */,
+				B9C8D1BB1F5FA1C6003EA5C4 /* MessageServiceType.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		B9C8D1BD1F5FB9F2003EA5C4 /* ApiaiAPI */ = {
+			isa = PBXGroup;
+			children = (
+				B9C8D1BE1F5FBA13003EA5C4 /* ApiaiAPI.swift */,
+			);
+			name = ApiaiAPI;
+			sourceTree = "<group>";
+		};
+		B9C8D1C21F5FEAA2003EA5C4 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B9C8D1C31F5FEAB6003EA5C4 /* Scene.swift */,
+				B9C8D1C51F5FEAED003EA5C4 /* Scene+ViewController.swift */,
+				B9C8D1C71F5FED0F003EA5C4 /* SceneCoordinator.swift */,
+				B9C8D1C91F5FED30003EA5C4 /* SceneCoordinatorType.swift */,
+				B9C8D1CB1F5FED53003EA5C4 /* SceneTransitionType.swift */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 		C5153B3B03D66B3E9686CC31 /* Pods */ = {
@@ -355,11 +431,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AI/AI.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -370,11 +443,8 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -410,11 +480,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Livebot/Pods-Livebot-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AI/AI.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
@@ -425,11 +494,10 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
@@ -449,8 +517,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B994C6CA1F398FA900050FD3 /* ViewController.swift in Sources */,
+				B9C8D1B81F5F9D5C003EA5C4 /* MessageService.swift in Sources */,
+				B9C8D1CC1F5FED53003EA5C4 /* SceneTransitionType.swift in Sources */,
+				B9C8D1C11F5FE453003EA5C4 /* BindableType.swift in Sources */,
+				B9C8D1C41F5FEAB6003EA5C4 /* Scene.swift in Sources */,
+				B9C8D1C81F5FED0F003EA5C4 /* SceneCoordinator.swift in Sources */,
+				B994C6CA1F398FA900050FD3 /* ChatViewController.swift in Sources */,
+				B9C8D1BC1F5FA1C6003EA5C4 /* MessageServiceType.swift in Sources */,
+				B9C8D1B51F5F9BF8003EA5C4 /* Message.swift in Sources */,
+				B9C8D1BA1F5F9E75003EA5C4 /* Bot.swift in Sources */,
+				B9C8D1C61F5FEAED003EA5C4 /* Scene+ViewController.swift in Sources */,
+				B9C8D1B21F5F856B003EA5C4 /* ChatViewModel.swift in Sources */,
 				B994C6C81F398FA900050FD3 /* AppDelegate.swift in Sources */,
+				B9C8D1CA1F5FED30003EA5C4 /* SceneCoordinatorType.swift in Sources */,
+				B9C8D1BF1F5FBA13003EA5C4 /* ApiaiAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
