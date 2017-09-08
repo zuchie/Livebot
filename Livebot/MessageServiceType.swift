@@ -17,5 +17,5 @@ enum MessageServiceError: Error {
 
 protocol MessageServiceType {
   @discardableResult
-  func findBot(from message: Message) -> Observable<Bot>
+  func findBot(from message: Message) throws -> Observable<Bot>
 }

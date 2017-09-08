@@ -1,7 +1,7 @@
 use_frameworks!
 platform :ios, '10.0'
 
-pod 'AI', '~> 0.0.8'
+#pod 'AI', '~> 0.0.8'
 pod 'RxSwift', '~> 3.6'
 #pod 'RxCocoa', '~> 3.6'
 pod 'RxRealm', '~> 0.6'

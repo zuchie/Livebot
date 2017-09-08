@@ -12,12 +12,7 @@ import RxSwift
 struct MessageService: MessageServiceType {
   
   @discardableResult
-  func findBot(from message: Message) -> Observable<Bot> {
-    // TODO: let weather = ["weather"], scan weather array.
-    if message.lowercased().contains("weather") {
-      return Observable.just(Bot.weather)
-    }
-    // TODO: Test other bots. 
-    return .error(MessageServiceError.unknownBot)
+  func findBot(from message: Message) throws -> Observable<Bot> {
+    return try MessageProcessor.process(message)
   }
 }
