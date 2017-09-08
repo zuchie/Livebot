@@ -141,7 +141,8 @@
 				B9C8D1C21F5FEAA2003EA5C4 /* Scenes */,
 				B9C8D1D31F6275A6003EA5C4 /* Services */,
 				B9C8D1B31F5F9BD6003EA5C4 /* Models */,
-				B9C8D1B01F5F7961003EA5C4 /* Controllers */,
+				B9C8D1D41F62788C003EA5C4 /* View Models */,
+				B9C8D1B01F5F7961003EA5C4 /* View Controllers */,
 				B994C6C71F398FA900050FD3 /* AppDelegate.swift */,
 				B994C6CB1F398FA900050FD3 /* Main.storyboard */,
 				B994C6CE1F398FA900050FD3 /* Assets.xcassets */,
@@ -169,14 +170,13 @@
 			path = LivebotUITests;
 			sourceTree = "<group>";
 		};
-		B9C8D1B01F5F7961003EA5C4 /* Controllers */ = {
+		B9C8D1B01F5F7961003EA5C4 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */,
 				B994C6C91F398FA900050FD3 /* ChatViewController.swift */,
-				B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */,
+				B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */,
 			);
-			name = Controllers;
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		B9C8D1B31F5F9BD6003EA5C4 /* Models */ = {
@@ -206,6 +206,14 @@
 				B9C8D1CE1F61DD5D003EA5C4 /* MessageProcessor.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		B9C8D1D41F62788C003EA5C4 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */,
+			);
+			name = "View Models";
 			sourceTree = "<group>";
 		};
 		C5153B3B03D66B3E9686CC31 /* Pods */ = {
