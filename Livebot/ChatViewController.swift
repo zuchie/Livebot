@@ -37,16 +37,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     sendButton.rx.tap
       .throttle(0.5, scheduler: MainScheduler.instance)
       .flatMap {
-        return try self.viewModel.onCreateRequest(message: self.message.text)
-          .catchErrorJustReturn(Request.empty)
-      }
-      .flatMap { request in
-        return APIController.shared.buildRequest(
-          apiKey: request.apiKey,
-          baseURL: request.url,
-          pathComponent: request.pathComponent,
-          params: request.parameters
-        )
+        return self.viewModel.createRequest(message: self.message.text)
+          //.catchErrorJustReturn(Request.empty)
       }
       .subscribe(onNext: { result in
         // TODO: process json to tableView

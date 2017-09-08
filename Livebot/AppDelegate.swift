@@ -16,10 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //AI.configure(clientAccessToken: "1d1ab7fd86f949bf833c7c81f661dbd3")
-      let service = MessageService()
       let sceneCoordinator = SceneCoordinator(window: window!)
-      let chatViewModel = ChatViewModel(messageService: service)
+      let chatViewModel = ChatViewModel()
       let firstScene = Scene.chat(chatViewModel)
       
       sceneCoordinator.transition(to: firstScene, type: .root)

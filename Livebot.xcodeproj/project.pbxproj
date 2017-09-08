@@ -17,10 +17,7 @@
 		B994C6DD1F398FA900050FD3 /* LivebotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6DC1F398FA900050FD3 /* LivebotTests.swift */; };
 		B994C6E81F398FA900050FD3 /* LivebotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B994C6E71F398FA900050FD3 /* LivebotUITests.swift */; };
 		B9C8D1B21F5F856B003EA5C4 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */; };
-		B9C8D1B51F5F9BF8003EA5C4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B41F5F9BF8003EA5C4 /* Message.swift */; };
-		B9C8D1B81F5F9D5C003EA5C4 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B71F5F9D5C003EA5C4 /* MessageService.swift */; };
 		B9C8D1BA1F5F9E75003EA5C4 /* Bot.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1B91F5F9E75003EA5C4 /* Bot.swift */; };
-		B9C8D1BC1F5FA1C6003EA5C4 /* MessageServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1BB1F5FA1C6003EA5C4 /* MessageServiceType.swift */; };
 		B9C8D1C11F5FE453003EA5C4 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */; };
 		B9C8D1C41F5FEAB6003EA5C4 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C31F5FEAB6003EA5C4 /* Scene.swift */; };
 		B9C8D1C61F5FEAED003EA5C4 /* Scene+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C8D1C51F5FEAED003EA5C4 /* Scene+ViewController.swift */; };
@@ -68,10 +65,7 @@
 		B994C6E71F398FA900050FD3 /* LivebotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivebotUITests.swift; sourceTree = "<group>"; };
 		B994C6E91F398FA900050FD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
-		B9C8D1B41F5F9BF8003EA5C4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		B9C8D1B71F5F9D5C003EA5C4 /* MessageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		B9C8D1B91F5F9E75003EA5C4 /* Bot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bot.swift; sourceTree = "<group>"; };
-		B9C8D1BB1F5FA1C6003EA5C4 /* MessageServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageServiceType.swift; sourceTree = "<group>"; };
 		B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		B9C8D1C31F5FEAB6003EA5C4 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		B9C8D1C51F5FEAED003EA5C4 /* Scene+ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scene+ViewController.swift"; sourceTree = "<group>"; };
@@ -144,10 +138,8 @@
 		B994C6C61F398FA900050FD3 /* Livebot */ = {
 			isa = PBXGroup;
 			children = (
-				B9C8D1D01F61E5CE003EA5C4 /* APIController */,
-				B9C8D1CD1F61DD3E003EA5C4 /* MessageProcessor */,
 				B9C8D1C21F5FEAA2003EA5C4 /* Scenes */,
-				B9C8D1B61F5F9D48003EA5C4 /* Services */,
+				B9C8D1D31F6275A6003EA5C4 /* Services */,
 				B9C8D1B31F5F9BD6003EA5C4 /* Models */,
 				B9C8D1B01F5F7961003EA5C4 /* Controllers */,
 				B994C6C71F398FA900050FD3 /* AppDelegate.swift */,
@@ -180,6 +172,7 @@
 		B9C8D1B01F5F7961003EA5C4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */,
 				B994C6C91F398FA900050FD3 /* ChatViewController.swift */,
 				B9C8D1B11F5F856B003EA5C4 /* ChatViewModel.swift */,
 			);
@@ -189,20 +182,9 @@
 		B9C8D1B31F5F9BD6003EA5C4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B9C8D1B41F5F9BF8003EA5C4 /* Message.swift */,
 				B9C8D1B91F5F9E75003EA5C4 /* Bot.swift */,
-				B9C8D1C01F5FE453003EA5C4 /* BindableType.swift */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		B9C8D1B61F5F9D48003EA5C4 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				B9C8D1B71F5F9D5C003EA5C4 /* MessageService.swift */,
-				B9C8D1BB1F5FA1C6003EA5C4 /* MessageServiceType.swift */,
-			);
-			name = Services;
 			sourceTree = "<group>";
 		};
 		B9C8D1C21F5FEAA2003EA5C4 /* Scenes */ = {
@@ -217,20 +199,13 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
-		B9C8D1CD1F61DD3E003EA5C4 /* MessageProcessor */ = {
-			isa = PBXGroup;
-			children = (
-				B9C8D1CE1F61DD5D003EA5C4 /* MessageProcessor.swift */,
-			);
-			name = MessageProcessor;
-			sourceTree = "<group>";
-		};
-		B9C8D1D01F61E5CE003EA5C4 /* APIController */ = {
+		B9C8D1D31F6275A6003EA5C4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				B9C8D1D11F61E67B003EA5C4 /* APIController.swift */,
+				B9C8D1CE1F61DD5D003EA5C4 /* MessageProcessor.swift */,
 			);
-			name = APIController;
+			name = Services;
 			sourceTree = "<group>";
 		};
 		C5153B3B03D66B3E9686CC31 /* Pods */ = {
@@ -441,7 +416,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-LivebotTests/Pods-LivebotTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AI/AI.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
@@ -453,7 +427,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
@@ -490,7 +463,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Livebot/Pods-Livebot-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AI/AI.framework",
 				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -504,7 +476,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -528,15 +499,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9C8D1B81F5F9D5C003EA5C4 /* MessageService.swift in Sources */,
 				B9C8D1CC1F5FED53003EA5C4 /* SceneTransitionType.swift in Sources */,
 				B9C8D1CF1F61DD5D003EA5C4 /* MessageProcessor.swift in Sources */,
 				B9C8D1C11F5FE453003EA5C4 /* BindableType.swift in Sources */,
 				B9C8D1C41F5FEAB6003EA5C4 /* Scene.swift in Sources */,
 				B9C8D1C81F5FED0F003EA5C4 /* SceneCoordinator.swift in Sources */,
 				B994C6CA1F398FA900050FD3 /* ChatViewController.swift in Sources */,
-				B9C8D1BC1F5FA1C6003EA5C4 /* MessageServiceType.swift in Sources */,
-				B9C8D1B51F5F9BF8003EA5C4 /* Message.swift in Sources */,
 				B9C8D1BA1F5F9E75003EA5C4 /* Bot.swift in Sources */,
 				B9C8D1C61F5FEAED003EA5C4 /* Scene+ViewController.swift in Sources */,
 				B9C8D1B21F5F856B003EA5C4 /* ChatViewModel.swift in Sources */,

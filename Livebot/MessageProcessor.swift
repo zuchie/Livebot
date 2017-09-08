@@ -9,9 +9,15 @@
 import Foundation
 import RxSwift
 
+enum MessageProcessorError: Error {
+  case unknownBot(String)
+}
+
 class MessageProcessor {
   
-  static func process(_ message: String) throws -> Observable<Bot> {
+  static var shared = MessageProcessor()
+  
+  func process(_ message: String) -> Observable<Bot> {
     
     // TODO: Replace placeholder
     let city = "San Jose"
@@ -30,6 +36,6 @@ class MessageProcessor {
     }
     
     // TODO: Test other bots.
-    return .error(MessageServiceError.unknownBot)
+    return .error(MessageProcessorError.unknownBot(message))
   }
 }

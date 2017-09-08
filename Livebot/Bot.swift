@@ -51,7 +51,6 @@ public func iconNameToChar(icon: String) -> String {
   switch icon {
   case "01d":
     return "\u{f11b}"
-  //return "\u{2734}"
   case "01n":
     return "\u{f110}"
   case "02d":

@@ -18,8 +18,8 @@ protocol BindableType {
 }
 
 extension BindableType where Self: UIViewController {
-  mutating func bindViewModel(to model: Self.ViewModelType) {
-    viewModel = model
+  mutating func bindViewModel(to viewModel: Self.ViewModelType) {
+    self.viewModel = viewModel
     loadViewIfNeeded()
     bindViewModel()
   }
