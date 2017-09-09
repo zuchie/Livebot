@@ -7,148 +7,149 @@
 //
 
 import Foundation
+import CoreLocation
 import RxSwift
 
 enum MessageProcessorError: Error {
   case unknownBot(String)
-  case invalidAddress
+  case missingInfo(String, String)
+  case queryBeyond(String, String)
+  //case invalidAddress
 }
 
-typealias TagSchemes = [String]
-typealias TagScheme = String
-typealias TaggerOptions = NSLinguisticTagger.Options
-
-enum MessageType {
-  case weather(TagSchemes, TagScheme, TaggerOptions)
-}
-
-struct DataDetected {
-  var addresses = [[String: String]]()
-  var dates = [String]()
-  var links = [String]()
-  var phoneNumbers = [String]()
+struct MessageProcessorResult {
+  var date: Date?
+  var placeName: String?
+  var personName: String?
+  var organizationName: String?
 }
 
 class MessageProcessor {
-  
   static var shared = MessageProcessor()
   
-  private let messageTypes = [
-    "weather": MessageType.weather(
-      [NSLinguisticTagSchemeNameType /*NSLinguisticTagSchemeNameTypeOrLexicalClass*/],
-      NSLinguisticTagPlaceName,
-      [.omitWhitespace, .omitPunctuation, .omitOther, .joinNames]
-    )
-  ]
-  
   func process(_ message: String) -> Observable<Bot> {
-    if message.lowercased().contains("weather") {
-      return dataDetector(message)
-        .flatMap { place -> Observable<Bot> in
-          guard let city = place.addresses.first?[NSTextCheckingCityKey] else {
-            print("Couldn't find city")
-            return .error(MessageProcessorError.invalidAddress)
+    let processedMessage = merge(dataDetector(message), nlp(message))
+
+    return Observable.just(processedMessage)
+      .flatMap { [weak self] processed -> Observable<Bot> in
+        // Weather bot
+        if message.lowercased().contains("weather") {
+          var place: String
+          var dayDelta: Int
+          if processed.placeName != nil {
+            place = processed.placeName!
+          } else {
+            print("Couldn't find city, use current location")
+            // TODO: Replace placeholder with current location city name.
+            place = "San Jose"
+          }
+          
+          if processed.date != nil {
+            dayDelta = self?.getDayDelta(Date(), processed.date!) ?? 0
+          } else {
+            print("Couldn't find date, use current date")
+            dayDelta = 0
+          }
+          
+          var path = ""
+          switch dayDelta {
+          case 0:
+            path = "weather"
+          case 1...5:
+            path = "forecast"
+          default:
+            return .error(MessageProcessorError.queryBeyond(message, "weather"))
           }
           
           let bot = Weather()
-          bot.request.pathComponent = "weather"
-          bot.request.parameters = [
-            ("q", city),
-            ("appid", bot.request.apiKey),
-            ("units", "metric")
-          ]
-          
-          return Observable.just(Bot.weather(bot))
-      }
-
-      /*
-      return nlp(message, "weather")
-        .flatMap { place -> Observable<Bot> in
-          let bot = Weather()
-          bot.request.pathComponent = "weather"
+          bot.request.pathComponent = path
           bot.request.parameters = [
             ("q", place),
-            ("appid", bot.request.apiKey),
-            ("units", "metric")
+            ("appid", bot.request.apiKey)
           ]
           
           return Observable.just(Bot.weather(bot))
         }
-      */
-    }
+        // TODO: Test other bots.
+        
+        return .error(MessageProcessorError.unknownBot(message))
+      }
+  }
+  
+  private func getDayDelta(_ firstDate: Date, _ secondDate: Date) -> Int {
+    let calendar = Calendar.current
     
-    // TODO: Test other bots.
+    let day1 = calendar.component(.day, from: firstDate)
+    let day2 = calendar.component(.day, from: secondDate)
     
-    return .error(MessageProcessorError.unknownBot(message))
+    return day2 - day1
+  }
+  
+  private func merge(_ resultWithDate: MessageProcessorResult, _ resultWithOthers: MessageProcessorResult) -> MessageProcessorResult {
+    return MessageProcessorResult(date: resultWithDate.date,
+                                  placeName: resultWithOthers.placeName,
+                                  personName: resultWithOthers.personName,
+                                  organizationName: resultWithOthers.organizationName)
   }
   
   // NSDataDetector couldn't detect addresses in format "city", e.g. San Jose
   // it can only detect addresses in format "city/City, STATE", e.g. san jose, CA
   // To detect date.
-  private func dataDetector(_ text: String) -> Observable<DataDetected> {
-    var text = text
-    text = "Weather in san jose, CA tomorrow"
+  private func dataDetector(_ text: String) -> MessageProcessorResult {
+    let text = text
+    //text = "Weather in san jose, CA tomorrow"
     let types: NSTextCheckingResult.CheckingType = [.address, .date, .link, .phoneNumber]
     let range = NSRange(location: 0, length: text.utf16.count)
-    let detector = try? NSDataDetector(types: types.rawValue)
-    
-    var data = DataDetected()
-    
-    return Observable.create { observer in
-      detector?.enumerateMatches(in: text, options: [], range: range) { result, flags, _ in
-        guard let match = result else {
-          return observer.onError(MessageProcessorError.unknownBot(text))
-        }
-        
-        if match.resultType == .address {
-          guard let addressComponents = match.addressComponents else {
-            print("No address components")
-            return observer.onError(MessageProcessorError.invalidAddress)
-          }
-          
-          data.addresses.append(addressComponents)
-          return observer.onNext(data)
-        }
-      }
-      return Disposables.create()
+    guard let detector = try? NSDataDetector(types: types.rawValue) else {
+      print("Couldn't create Data Detector")
+      fatalError()
     }
+    
+    var matchResult = MessageProcessorResult()
+    
+    detector.enumerateMatches(in: text, options: [], range: range) { result, _, _ in
+      
+      if result?.resultType == .date, let date = result?.date {
+        print("date: \(date)")
+        matchResult.date = date
+      } else {
+        print("Couldn't find a match")
+      }
+    }
+    
+    return matchResult
   }
   
   // To detect city name because it doesn't need to include STATE in text.
-  private func nlp(_ text: String, _ type: String) -> Observable<String> {
+  private func nlp(_ text: String) -> MessageProcessorResult {
     let text = text
-    var tagSchemes: TagSchemes
-    var tagScheme: TagScheme
-    var taggerOptions: TaggerOptions
-    guard let messageType = messageTypes[type] else {
-      return .error(MessageProcessorError.unknownBot(text))
-    }
-    switch messageType {
-    case let .weather(schemes, scheme, options):
-      tagSchemes = schemes
-      tagScheme = scheme
-      taggerOptions = options
-    }
-    
-    let tagger = NSLinguisticTagger(
-      tagSchemes: tagSchemes, // NSLinguisticTagger.availableTagSchemes(forLanguage: "en"),
-      options: Int(taggerOptions.rawValue)
-    )
+    let tagScheme = NSLinguisticTagSchemeNameType
+    let taggerOptions: NSLinguisticTagger.Options = [.omitWhitespace, .omitPunctuation, .omitOther, .joinNames]
+    let tagger = NSLinguisticTagger(tagSchemes: [tagScheme], options: Int(taggerOptions.rawValue))
     tagger.string = text
     let range = NSRange(location: 0, length: text.utf16.count)
-
-    return Observable.create { observer in
-      tagger.enumerateTags(in: range, scheme: tagSchemes.first!, options: taggerOptions) {
-        tag, tokenRange, _, _ in
-        let token = (text as NSString).substring(with: tokenRange)
-        print("\(token): \(tag)")
-        
-        if tag == tagScheme {
-          observer.onNext(token)
-        }
+    
+    var result = MessageProcessorResult()
+    
+    tagger.enumerateTags(in: range, scheme: tagScheme, options: taggerOptions) {
+      tag, tokenRange, _, _ in
+      let token = (text as NSString).substring(with: tokenRange)
+      print("\(token): \(tag)")
+      
+      switch tag {
+      case NSLinguisticTagPlaceName:
+        result.placeName = token
+      case NSLinguisticTagPersonalName:
+        result.personName = token
+      case NSLinguisticTagOrganizationName:
+        result.organizationName = token
+      default:
+        //print("Unexpected tag")
+        break
       }
-      return Disposables.create()
     }
+    
+    return result
   }
 
 }

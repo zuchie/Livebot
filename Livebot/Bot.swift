@@ -17,7 +17,7 @@ struct Request {
   var pathComponent: String
   var parameters: [(String, String)]
   
-  static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [])
+  //static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [])
 }
 
 enum Bot {

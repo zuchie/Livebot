@@ -38,14 +38,24 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       .throttle(0.5, scheduler: MainScheduler.instance)
       .flatMap {
         return self.viewModel.createRequest(message: self.message.text)
-          //.catchErrorJustReturn(Request.empty)
       }
       .subscribe(onNext: { result in
         // TODO: process json to tableView
         print(result)
       }, onError: { error in
-        // TODO: Error handling
-        print(error)
+        // TODO: Error handling, don't freeze app when error.
+        switch error {
+        case let MessageProcessorError.missingInfo(message, bot):
+          print("== bot: \(bot), missing info from: \(message)")
+        case let MessageProcessorError.unknownBot(message):
+          print("== unknown bot: \(message)")
+        case APIControllerError.invalidURL:
+          print("## invalid URL")
+        case APIControllerError.invalidURLComponents:
+          print("## invalid URL components")
+        default:
+          print("** other error: \(error)")
+        }
       })
       .disposed(by: bag)
   }
