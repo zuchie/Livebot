@@ -26,7 +26,7 @@ struct ChatViewModel {
           baseURL: request.url,
           pathComponent: request.pathComponent,
           params: request.parameters,
-          header: request.header
+          headers: request.headers
         )
     }
   }

@@ -29,7 +29,7 @@ class APIController {
     baseURL: URL,
     pathComponent: String,
     params: [(String, String)],
-    header: (value: String, field: String)
+    headers: [(value: String, field: String)]
   ) -> Observable<JSON> {
     
     let url = baseURL.appendingPathComponent(pathComponent)
@@ -52,7 +52,9 @@ class APIController {
     }
     request.url = requestURL
     request.httpMethod = method
-    request.setValue(header.value, forHTTPHeaderField: header.field)
+    for header in headers {
+      request.addValue(header.value, forHTTPHeaderField: header.field)
+    }
     
     return URLSession.shared.rx.data(request: request).map { JSON(data: $0) }
   }

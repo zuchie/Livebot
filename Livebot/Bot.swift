@@ -16,13 +16,31 @@ struct Request {
   var apiKey: String
   var pathComponent: String
   var parameters: [(String, String)]
-  var header: (value: String, field: String)
+  var headers: [(value: String, field: String)]
   
   //static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [])
 }
 
 enum Bot {
   case weather(Weather)
+}
+
+class APIai {
+  struct Result {
+    var cityName = "Unknown"
+    var date = ""
+  }
+  
+  var request = Request(
+    baseURL: "https://api.api.ai/v1",
+    apiKey: "",
+    pathComponent: "query",
+    parameters: [("v", "20150910")],
+    headers: [
+      (value: "Bearer 5e4ca032835746629ad895a8117de97b", field: "Authorization"),
+      (value: "application/json", field: "Content-Type")
+    ]
+  )
 }
 
 class Weather {
@@ -38,7 +56,7 @@ class Weather {
     apiKey: "fdbfbda8ea64d823d88305440f63caf7",
     pathComponent: "",
     parameters: [],
-    header: (value: "application/json", field: "Content-Type")
+    headers: [(value: "application/json", field: "Content-Type")]
   )
   
   var result = Result()
