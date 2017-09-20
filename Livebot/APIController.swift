@@ -28,7 +28,9 @@ class APIController {
     apiKey: String,
     baseURL: URL,
     pathComponent: String,
-    params: [(String, String)]) -> Observable<JSON> {
+    params: [(String, String)],
+    header: (value: String, field: String)
+  ) -> Observable<JSON> {
     
     let url = baseURL.appendingPathComponent(pathComponent)
     guard let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: true) else {
@@ -50,7 +52,7 @@ class APIController {
     }
     request.url = requestURL
     request.httpMethod = method
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue(header.value, forHTTPHeaderField: header.field)
     
     return URLSession.shared.rx.data(request: request).map { JSON(data: $0) }
   }

@@ -16,6 +16,7 @@ struct Request {
   var apiKey: String
   var pathComponent: String
   var parameters: [(String, String)]
+  var header: (value: String, field: String)
   
   //static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [])
 }
@@ -36,7 +37,8 @@ class Weather {
     baseURL: "http://api.openweathermap.org/data/2.5",
     apiKey: "fdbfbda8ea64d823d88305440f63caf7",
     pathComponent: "",
-    parameters: []
+    parameters: [],
+    header: (value: "application/json", field: "Content-Type")
   )
   
   var result = Result()

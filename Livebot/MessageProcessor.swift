@@ -14,6 +14,7 @@ enum MessageProcessorError: Error {
   case unknownBot(String)
   case missingInfo(String, String)
   case queryBeyond(String, String)
+  case prepareBotFailed
   //case invalidAddress
 }
 
@@ -34,46 +35,50 @@ class MessageProcessor {
       .flatMap { [weak self] processed -> Observable<Bot> in
         // Weather bot
         if message.lowercased().contains("weather") {
-          var place: String
-          var dayDelta: Int
-          if processed.placeName != nil {
-            place = processed.placeName!
-          } else {
-            print("Couldn't find city, use current location")
-            // TODO: Replace placeholder with current location city name.
-            place = "San Jose"
-          }
-          
-          if processed.date != nil {
-            dayDelta = self?.getDayDelta(Date(), processed.date!) ?? 0
-          } else {
-            print("Couldn't find date, use current date")
-            dayDelta = 0
-          }
-          
-          var path = ""
-          switch dayDelta {
-          case 0:
-            path = "weather"
-          case 1...5:
-            path = "forecast"
-          default:
-            return .error(MessageProcessorError.queryBeyond(message, "weather"))
-          }
-          
-          let bot = Weather()
-          bot.request.pathComponent = path
-          bot.request.parameters = [
-            ("q", place),
-            ("appid", bot.request.apiKey)
-          ]
-          
-          return Observable.just(Bot.weather(bot))
+          return self?.prepareWeatherBot(message, processed) ?? .error(MessageProcessorError.prepareBotFailed)
         }
         // TODO: Test other bots.
         
         return .error(MessageProcessorError.unknownBot(message))
       }
+  }
+  
+  private func prepareWeatherBot(_ message: String, _ processed: MessageProcessorResult) -> Observable<Bot> {
+    var place: String
+    var dayDelta: Int
+    if processed.placeName != nil {
+      place = processed.placeName!
+    } else {
+      print("Couldn't find city, use current location")
+      // TODO: Replace placeholder with current location city name.
+      place = "San Jose"
+    }
+    
+    if processed.date != nil {
+      dayDelta = getDayDelta(Date(), processed.date!)
+    } else {
+      print("Couldn't find date, use current date")
+      dayDelta = 0
+    }
+    
+    var path = ""
+    switch dayDelta {
+    case 0:
+      path = "weather"
+    case 1...5:
+      path = "forecast"
+    default:
+      return .error(MessageProcessorError.queryBeyond(message, "weather"))
+    }
+    
+    let bot = Weather()
+    bot.request.pathComponent = path
+    bot.request.parameters = [
+      ("q", place),
+      ("appid", bot.request.apiKey)
+    ]
+    
+    return Observable.just(Bot.weather(bot))
   }
   
   private func getDayDelta(_ firstDate: Date, _ secondDate: Date) -> Int {
@@ -121,6 +126,8 @@ class MessageProcessor {
   }
   
   // To detect city name because it doesn't need to include STATE in text.
+  // TODO: "Weather in San Francisco on Sunday" will be processed in "San Francisco on Sunday - PersonalName"?
+  // Unless it's "Weather in San Francisco, on Sunday"
   private func nlp(_ text: String) -> MessageProcessorResult {
     let text = text
     let tagScheme = NSLinguisticTagSchemeNameType
@@ -144,7 +151,6 @@ class MessageProcessor {
       case NSLinguisticTagOrganizationName:
         result.organizationName = token
       default:
-        //print("Unexpected tag")
         break
       }
     }
