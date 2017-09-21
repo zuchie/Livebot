@@ -31,16 +31,15 @@ class MessageProcessor {
   let bag = DisposeBag()
   
   func process(_ message: String) -> Observable<Bot> {
-    return doAPIaiNLP(message)
-      .flatMap { [weak self] processed -> Observable<Bot> in
-        // Weather bot
-        if message.lowercased().contains("weather") {
+    if message.lowercased().contains("weather") {
+      return doAPIaiNLP(message)
+        .flatMap { [weak self] processed -> Observable<Bot> in
+          // Weather bot
           return self?.prepareWeatherBot(message, processed) ?? .error(MessageProcessorError.prepareBotFailed)
         }
-        // TODO: Test other bots.
-        
-        return .error(MessageProcessorError.unknownBot(message))
-      }
+    } else { // TODO: Test other bots.
+      return .error(MessageProcessorError.unknownBot(message))
+    }
   }
   
   func doAPIaiNLP(_ text: String) -> Observable<MessageProcessorResult> {
@@ -105,11 +104,12 @@ class MessageProcessor {
       return .error(MessageProcessorError.queryBeyond(message, "weather"))
     }
     
-    let bot = Weather()
+    var bot = Weather()
     bot.request.pathComponent = path
     bot.request.parameters = [
       ("q", place),
-      ("appid", bot.request.apiKey)
+      ("appid", bot.request.apiKey),
+      ("units", "metric")
     ]
     
     return Observable.just(Bot.weather(bot))

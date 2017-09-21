@@ -17,6 +17,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   private let bag = DisposeBag()
   internal var viewModel: ChatViewModel!
+  
+  private struct DataSource {
+    var text: String?
+    var weather: Weather?
+  }
+  
+  private var dataSource = [DataSource]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,14 +40,30 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Dispose of any resources that can be recreated.
   }
   
+  private func prepareDataSource(from text: String?, _ weather: Weather?) -> DataSource {
+    return DataSource(text: text, weather: weather)
+  }
+  
   func bindViewModel() {
     sendButton.rx.tap
       .throttle(0.5, scheduler: MainScheduler.instance)
       .flatMap {
         return self.viewModel.createRequest(message: self.message.text)
       }
+      .observeOn(MainScheduler.instance)
       .subscribe(onNext: { result in
         // TODO: process json to tableView
+        let weather = Weather(
+          cityName: result["name"].string ?? "Unknown",
+          temperature: result["main"]["temp"].int ?? -1000,
+          humidity: result["main"]["humidity"].int ?? 0,
+          icon: result["weather"]["icon"].string ?? "e",
+          request: Request.empty
+        )
+        
+        self.dataSource.append(self.prepareDataSource(from: self.message.text, weather))
+        self.chatTableView.reloadData()
+        
         print(result)
       }, onError: { error in
         // TODO: Error handling, don't freeze app when error.
@@ -48,6 +71,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         case let MessageProcessorError.missingInfo(message, bot):
           print("== bot: \(bot), missing info from: \(message)")
         case let MessageProcessorError.unknownBot(message):
+          self.dataSource.append(self.prepareDataSource(from: message, nil))
+          self.chatTableView.reloadData()
+          
           print("== unknown bot: \(message)")
         case APIControllerError.invalidURL:
           print("## invalid URL")
@@ -60,8 +86,16 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       .disposed(by: bag)
   }
 
-  fileprivate func configureCell(_ cell: UITableViewCell) {
-    cell.textLabel?.text = "cell"
+  fileprivate func configureCell(_ cell: UITableViewCell, _ index: IndexPath) {
+    let data = dataSource[index.row]
+    
+    cell.textLabel?.text = data.text
+    
+    if data.weather != nil {
+      // TODO: Configure weather cell
+    } else {
+      // TODO: Configure normal cell
+    }
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -69,14 +103,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return dataSource.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath)
 
-    configureCell(cell)
+    configureCell(cell, indexPath)
     
     return cell
   }

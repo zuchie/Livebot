@@ -18,7 +18,7 @@ struct Request {
   var parameters: [(String, String)]
   var headers: [(value: String, field: String)]
   
-  //static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [])
+  static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [], headers: [])
 }
 
 enum Bot {
@@ -49,14 +49,12 @@ class APIai {
   )
 }
 
-class Weather {
-  struct Result {
-    var cityName = "Unknown"
-    var temperature = -1000
-    var humidity = 0
-    var icon: String = iconNameToChar(icon: "e")
-  }
-
+struct Weather {
+  var cityName = "Unknown"
+  var temperature = -1000
+  var humidity = 0
+  var icon: String = iconNameToChar(icon: "e")
+  
   var request = Request(
     baseURL: "http://api.openweathermap.org/data/2.5",
     apiKey: "fdbfbda8ea64d823d88305440f63caf7",
@@ -64,9 +62,6 @@ class Weather {
     parameters: [],
     headers: [(value: "application/json", field: "Content-Type")]
   )
-  
-  var result = Result()
-  
 }
 
 /**
