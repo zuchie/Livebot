@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import RxSwift
+import SwiftyJSON
 
 enum MessageProcessorError: Error {
   case unknownBot(String)
@@ -27,8 +28,21 @@ struct MessageProcessorResult {
 
 class MessageProcessor {
   static var shared = MessageProcessor()
+  let bag = DisposeBag()
   
   func process(_ message: String) -> Observable<Bot> {
+    return doAPIaiNLP(message)
+      .flatMap { [weak self] processed -> Observable<Bot> in
+        // Weather bot
+        if message.lowercased().contains("weather") {
+          return self?.prepareWeatherBot(message, processed) ?? .error(MessageProcessorError.prepareBotFailed)
+        }
+        // TODO: Test other bots.
+        
+        return .error(MessageProcessorError.unknownBot(message))
+      }
+    
+    /*
     let processedMessage = merge(dataDetector(message), nlp(message))
 
     return Observable.just(processedMessage)
@@ -41,6 +55,40 @@ class MessageProcessor {
         
         return .error(MessageProcessorError.unknownBot(message))
       }
+    */
+  }
+  
+  func doAPIaiNLP(_ text: String) -> Observable<MessageProcessorResult> {
+    var APIaiRequest = APIai.shared.request
+    var results = MessageProcessorResult()
+    
+    APIaiRequest.parameters.append(("query", text))
+    
+    return APIController.shared.makeRequest(
+      apiKey: APIaiRequest.apiKey,
+      baseURL: APIaiRequest.url,
+      pathComponent: APIaiRequest.pathComponent,
+      params: APIaiRequest.parameters,
+      headers: APIaiRequest.headers
+    )
+    .map { json in
+      let params = json["result"]["parameters"]
+      
+      results.placeName = params["geo-city"].string
+
+      let dateFormatter = DateFormatter()
+      dateFormatter.dateFormat = "yyyy-MM-dd"
+      guard let ISODate = params["date"].string,
+        let date = dateFormatter.date(from: ISODate) else {
+        // TODO
+        fatalError()
+      }
+      
+      results.date = date
+      
+      return results
+    }
+
   }
   
   private func prepareWeatherBot(_ message: String, _ processed: MessageProcessorResult) -> Observable<Bot> {
@@ -90,13 +138,16 @@ class MessageProcessor {
     return day2 - day1
   }
   
+  /*
   private func merge(_ resultWithDate: MessageProcessorResult, _ resultWithOthers: MessageProcessorResult) -> MessageProcessorResult {
     return MessageProcessorResult(date: resultWithDate.date,
                                   placeName: resultWithOthers.placeName,
                                   personName: resultWithOthers.personName,
                                   organizationName: resultWithOthers.organizationName)
   }
+  */
   
+  /*
   // NSDataDetector couldn't detect addresses in format "city", e.g. San Jose
   // it can only detect addresses in format "city/City, STATE", e.g. san jose, CA
   // To detect date.
@@ -124,7 +175,8 @@ class MessageProcessor {
     
     return matchResult
   }
-  
+  */
+  /*
   // To detect city name because it doesn't need to include STATE in text.
   // TODO: "Weather in San Francisco on Sunday" will be processed in "San Francisco on Sunday - PersonalName"?
   // Unless it's "Weather in San Francisco, on Sunday"
@@ -157,5 +209,5 @@ class MessageProcessor {
     
     return result
   }
-
+  */
 }

@@ -26,6 +26,8 @@ enum Bot {
 }
 
 class APIai {
+  static var shared = APIai()
+  
   struct Result {
     var cityName = "Unknown"
     var date = ""
@@ -35,7 +37,11 @@ class APIai {
     baseURL: "https://api.api.ai/v1",
     apiKey: "",
     pathComponent: "query",
-    parameters: [("v", "20150910")],
+    parameters: [
+      ("v", "20150910"),
+      ("lang", "en"),
+      ("sessionId", "1234567890")
+    ],
     headers: [
       (value: "Bearer 5e4ca032835746629ad895a8117de97b", field: "Authorization"),
       (value: "application/json", field: "Content-Type")
