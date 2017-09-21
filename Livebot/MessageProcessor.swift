@@ -41,21 +41,6 @@ class MessageProcessor {
         
         return .error(MessageProcessorError.unknownBot(message))
       }
-    
-    /*
-    let processedMessage = merge(dataDetector(message), nlp(message))
-
-    return Observable.just(processedMessage)
-      .flatMap { [weak self] processed -> Observable<Bot> in
-        // Weather bot
-        if message.lowercased().contains("weather") {
-          return self?.prepareWeatherBot(message, processed) ?? .error(MessageProcessorError.prepareBotFailed)
-        }
-        // TODO: Test other bots.
-        
-        return .error(MessageProcessorError.unknownBot(message))
-      }
-    */
   }
   
   func doAPIaiNLP(_ text: String) -> Observable<MessageProcessorResult> {
@@ -76,6 +61,7 @@ class MessageProcessor {
       
       results.placeName = params["geo-city"].string
       
+      // Convert from date string to Date
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd"
       guard let ISODate = params["date"].string,
@@ -138,76 +124,4 @@ class MessageProcessor {
     return day2 - day1
   }
   
-  /*
-  private func merge(_ resultWithDate: MessageProcessorResult, _ resultWithOthers: MessageProcessorResult) -> MessageProcessorResult {
-    return MessageProcessorResult(date: resultWithDate.date,
-                                  placeName: resultWithOthers.placeName,
-                                  personName: resultWithOthers.personName,
-                                  organizationName: resultWithOthers.organizationName)
-  }
-  */
-  
-  /*
-  // NSDataDetector couldn't detect addresses in format "city", e.g. San Jose
-  // it can only detect addresses in format "city/City, STATE", e.g. san jose, CA
-  // To detect date.
-  private func dataDetector(_ text: String) -> MessageProcessorResult {
-    let text = text
-    //text = "Weather in san jose, CA tomorrow"
-    let types: NSTextCheckingResult.CheckingType = [.address, .date, .link, .phoneNumber]
-    let range = NSRange(location: 0, length: text.utf16.count)
-    guard let detector = try? NSDataDetector(types: types.rawValue) else {
-      print("Couldn't create Data Detector")
-      fatalError()
-    }
-    
-    var matchResult = MessageProcessorResult()
-    
-    detector.enumerateMatches(in: text, options: [], range: range) { result, _, _ in
-      
-      if result?.resultType == .date, let date = result?.date {
-        print("date: \(date)")
-        matchResult.date = date
-      } else {
-        print("Couldn't find a match")
-      }
-    }
-    
-    return matchResult
-  }
-  */
-  /*
-  // To detect city name because it doesn't need to include STATE in text.
-  // TODO: "Weather in San Francisco on Sunday" will be processed in "San Francisco on Sunday - PersonalName"?
-  // Unless it's "Weather in San Francisco, on Sunday"
-  private func nlp(_ text: String) -> MessageProcessorResult {
-    let text = text
-    let tagScheme = NSLinguisticTagSchemeNameType
-    let taggerOptions: NSLinguisticTagger.Options = [.omitWhitespace, .omitPunctuation, .omitOther, .joinNames]
-    let tagger = NSLinguisticTagger(tagSchemes: [tagScheme], options: Int(taggerOptions.rawValue))
-    tagger.string = text
-    let range = NSRange(location: 0, length: text.utf16.count)
-    
-    var result = MessageProcessorResult()
-    
-    tagger.enumerateTags(in: range, scheme: tagScheme, options: taggerOptions) {
-      tag, tokenRange, _, _ in
-      let token = (text as NSString).substring(with: tokenRange)
-      print("\(token): \(tag)")
-      
-      switch tag {
-      case NSLinguisticTagPlaceName:
-        result.placeName = token
-      case NSLinguisticTagPersonalName:
-        result.personName = token
-      case NSLinguisticTagOrganizationName:
-        result.organizationName = token
-      default:
-        break
-      }
-    }
-    
-    return result
-  }
-  */
 }
