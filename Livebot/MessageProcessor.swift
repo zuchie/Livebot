@@ -75,13 +75,13 @@ class MessageProcessor {
       let params = json["result"]["parameters"]
       
       results.placeName = params["geo-city"].string
-
+      
       let dateFormatter = DateFormatter()
       dateFormatter.dateFormat = "yyyy-MM-dd"
       guard let ISODate = params["date"].string,
         let date = dateFormatter.date(from: ISODate) else {
-        // TODO
-        fatalError()
+          
+        return results
       }
       
       results.date = date
@@ -94,7 +94,7 @@ class MessageProcessor {
   private func prepareWeatherBot(_ message: String, _ processed: MessageProcessorResult) -> Observable<Bot> {
     var place: String
     var dayDelta: Int
-    if processed.placeName != nil {
+    if processed.placeName != nil, processed.placeName != "" {
       place = processed.placeName!
     } else {
       print("Couldn't find city, use current location")
