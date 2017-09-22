@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, BindableType {
   @IBOutlet weak var chatTableView: UITableView!
@@ -33,6 +34,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     chatTableView.dataSource = self
     message.delegate = self
     
+    //chatTableView.estimatedRowHeight = 44
+    //chatTableView.rowHeight = UITableViewAutomaticDimension
   }
 
   override func didReceiveMemoryWarning() {
@@ -44,7 +47,25 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     return DataSource(text: text, weather: weather)
   }
   
+  private func scrollToBottom() {
+    let indexPath = IndexPath(row: dataSource.count - 1, section: 0)
+    chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+  }
+  
   func bindViewModel() {
+    // Query message
+    sendButton.rx.tap
+      .throttle(0.5, scheduler: MainScheduler.instance)
+      .filter { (self.message.text ?? "").characters.count > 0 }
+      .subscribe(onNext: {
+        let data = self.prepareDataSource(from: self.message.text, nil)
+        self.dataSource.append(data)
+        self.chatTableView.reloadData()
+        self.scrollToBottom()
+      })
+      .disposed(by: bag)
+    
+    // Answer message
     sendButton.rx.tap
       .throttle(0.5, scheduler: MainScheduler.instance)
       .flatMap {
@@ -57,12 +78,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
           cityName: result["name"].string ?? "Unknown",
           temperature: result["main"]["temp"].int ?? -1000,
           humidity: result["main"]["humidity"].int ?? 0,
-          icon: result["weather"]["icon"].string ?? "e",
+          icon: result["weather"][0]["icon"].string ?? "e",
+          date: result["dt"].int?.dateFormat ?? "Unknown",
           request: Request.empty
         )
         
-        self.dataSource.append(self.prepareDataSource(from: self.message.text, weather))
+        self.dataSource.append(self.prepareDataSource(from: nil, weather))
         self.chatTableView.reloadData()
+        self.scrollToBottom()
         
         print(result)
       }, onError: { error in
@@ -73,6 +96,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         case let MessageProcessorError.unknownBot(message):
           self.dataSource.append(self.prepareDataSource(from: message, nil))
           self.chatTableView.reloadData()
+          self.scrollToBottom()
           
           print("== unknown bot: \(message)")
         case APIControllerError.invalidURL:
@@ -86,16 +110,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       .disposed(by: bag)
   }
 
-  fileprivate func configureCell(_ cell: UITableViewCell, _ index: IndexPath) {
-    let data = dataSource[index.row]
-    
-    cell.textLabel?.text = data.text
-    
-    if data.weather != nil {
-      // TODO: Configure weather cell
-    } else {
-      // TODO: Configure normal cell
+  private func configureCell(_ cell: UITableViewCell, _ data: DataSource) {
+    if let weather = data.weather {
+      guard let weatherCell = cell as? WeatherTableViewCell else {
+        fatalError()
+      }
+
+      weatherCell.icon.text = iconNameToChar(icon: weather.icon)
+      weatherCell.cityName.text = weather.cityName
+      weatherCell.temperature.text = weather.temperature.description + "℃"
+      weatherCell.humidity.text = weather.humidity.description + "%"
+      weatherCell.date.text = weather.date
     }
+    if let text = data.text {
+      cell.textLabel?.text = text
+    }
+    
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -107,12 +137,35 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let data = dataSource[indexPath.row]
+    
+    if data.weather != nil {
+      // TODO: Configure weather cell
+      let cellNib = UINib(nibName: "WeatherTableViewCell", bundle: nil)
+      chatTableView.register(cellNib, forCellReuseIdentifier: "chatCell")
+    } else {
+      // TODO: Configure text cell
+      let cellNib = UINib(nibName: "TextTableViewCell", bundle: nil)
+      chatTableView.register(cellNib, forCellReuseIdentifier: "chatCell")
+    }
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath)
 
-    configureCell(cell, indexPath)
+    configureCell(cell, data)
     
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let data = dataSource[indexPath.row]
+    let weatherCellHeight: CGFloat = 512.0
+    let textCellHeight: CGFloat = 44.0
+    
+    if data.weather != nil {
+      return weatherCellHeight
+    } else {
+      return textCellHeight
+    }
   }
   
 }

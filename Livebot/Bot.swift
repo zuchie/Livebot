@@ -53,7 +53,8 @@ struct Weather {
   var cityName = "Unknown"
   var temperature = -1000
   var humidity = 0
-  var icon: String = iconNameToChar(icon: "e")
+  var icon = iconNameToChar(icon: "e")
+  var date = "Unknown"
   
   var request = Request(
     baseURL: "http://api.openweathermap.org/data/2.5",
