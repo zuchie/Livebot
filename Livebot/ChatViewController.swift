@@ -34,10 +34,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     chatTableView.dataSource = self
     message.delegate = self
     
+    registerForKeyboardNotifications()
     //chatTableView.estimatedRowHeight = 44
     //chatTableView.rowHeight = UITableViewAutomaticDimension
   }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    unregisterForKeyboardNotifications()
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -166,6 +171,62 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     } else {
       return textCellHeight
     }
+  }
+  
+  // Keyboard
+  private func registerForKeyboardNotifications() {
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow(notification:)),
+      name: .UIKeyboardWillShow,
+      object: nil
+    )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillHide(notification:)),
+      name: .UIKeyboardWillHide,
+      object: nil
+    )
+  }
+
+  private func unregisterForKeyboardNotifications() {
+    NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+  }
+
+  func keyboardWillShow(notification: Notification) {
+    let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size
+    
+    if self.view.frame.origin.y == 0 {
+      self.view.frame.origin.y -= keyboardSize.height
+    }
+    /*
+    let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+    chatTableView.contentInset = contentInsets
+    chatTableView.scrollIndicatorInsets = contentInsets
+    
+    var rect = self.view.frame
+    rect.size.height -= keyboardSize.height
+    
+    if !rect.contains(self.message.frame.origin) {
+      chatTableView.scrollRectToVisible(message.frame, animated: true)
+    }
+    */
+  }
+  
+  func keyboardWillHide(notification: Notification) {
+    let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as AnyObject).cgRectValue.size
+
+    if self.view.frame.origin.y != 0 {
+      self.view.frame.origin.y += keyboardSize.height
+    }
+
+    /*
+    let contentInsets = UIEdgeInsets.zero
+    
+    chatTableView.contentInset = contentInsets
+    chatTableView.scrollIndicatorInsets = contentInsets
+    */
   }
   
 }
