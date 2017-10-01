@@ -35,6 +35,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     message.delegate = self
     
     registerForKeyboardNotifications()
+    
+    let weatherCellNib = UINib(nibName: "WeatherTableViewCell", bundle: nil)
+    chatTableView.register(weatherCellNib, forCellReuseIdentifier: "weatherCell")
+  
+    let textCellNib = UINib(nibName: "TextTableViewCell", bundle: nil)
+    chatTableView.register(textCellNib, forCellReuseIdentifier: "textCell")
+    
+    
     //chatTableView.estimatedRowHeight = 44
     //chatTableView.rowHeight = UITableViewAutomaticDimension
   }
@@ -143,18 +151,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let data = dataSource[indexPath.row]
+    var cell: UITableViewCell
     
     if data.weather != nil {
       // TODO: Configure weather cell
-      let cellNib = UINib(nibName: "WeatherTableViewCell", bundle: nil)
-      chatTableView.register(cellNib, forCellReuseIdentifier: "chatCell")
+      cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
     } else {
       // TODO: Configure text cell
-      let cellNib = UINib(nibName: "TextTableViewCell", bundle: nil)
-      chatTableView.register(cellNib, forCellReuseIdentifier: "chatCell")
+      cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath)
     }
-    
-    let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath)
 
     configureCell(cell, data)
     
