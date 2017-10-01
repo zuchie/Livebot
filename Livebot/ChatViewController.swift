@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SwiftyJSON
+import RxRealm
+import RealmSwift
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, BindableType {
   @IBOutlet weak var chatTableView: UITableView!
@@ -18,12 +20,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   private let bag = DisposeBag()
   internal var viewModel: ChatViewModel!
-  
-  private struct DataSource {
-    var text: String?
-    var weather: Weather?
-  }
-  
+
   private var dataSource = [DataSource]()
 
   override func viewDidLoad() {
@@ -42,6 +39,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     let textCellNib = UINib(nibName: "TextTableViewCell", bundle: nil)
     chatTableView.register(textCellNib, forCellReuseIdentifier: "textCell")
     
+    guard let realm = try? Realm() else {
+      return
+    }
+    
+    let data = realm.objects(DataSource.self)
+    
+    Observable.array(from: data)
+      .subscribe(onNext: { items in
+        print("returned \(items.count) items")
+        self.dataSource = items.sorted(by: { $0.timeStamp < $1.timeStamp })
+      })
+      .disposed(by: bag)
+    
+    scrollToBottom()
+    //chatTableView.reloadData()
     
     //chatTableView.estimatedRowHeight = 44
     //chatTableView.rowHeight = UITableViewAutomaticDimension
@@ -57,7 +69,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   private func prepareDataSource(from text: String?, _ weather: Weather?) -> DataSource {
-    return DataSource(text: text, weather: weather)
+    let data = DataSource()
+    
+    data.text = text
+    data.weather = weather
+    
+    return data
   }
   
   private func scrollToBottom() {
@@ -66,6 +83,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   func bindViewModel() {
+    guard let realm = try? Realm() else {
+      return
+    }
+
     // Query message
     sendButton.rx.tap
       .throttle(0.5, scheduler: MainScheduler.instance)
@@ -75,6 +96,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.dataSource.append(data)
         self.chatTableView.reloadData()
         self.scrollToBottom()
+        
+        try? realm.write {
+          realm.add(self.dataSource)
+        }
+        print("==realm added text")
       })
       .disposed(by: bag)
     
@@ -88,17 +114,20 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       .subscribe(onNext: { result in
         // TODO: process json to tableView
         let weather = Weather()
-          weather.cityName = result["name"].string ?? "Unknown"
-          weather.temperature = result["main"]["temp"].int ?? -1000
-          weather.humidity = result["main"]["humidity"].int ?? 0
-          weather.icon = result["weather"][0]["icon"].string ?? "e"
-          weather.date = result["dt"].int?.dateFormat ?? "Unknown"
-          //weather.request = Request.empty
+        weather.cityName = result["name"].string ?? "Unknown"
+        weather.temperature = result["main"]["temp"].int ?? -1000
+        weather.humidity = result["main"]["humidity"].int ?? 0
+        weather.icon = result["weather"][0]["icon"].string ?? "e"
+        weather.date = result["dt"].int?.dateFormat ?? "Unknown"
         
         self.dataSource.append(self.prepareDataSource(from: nil, weather))
         self.chatTableView.reloadData()
         self.scrollToBottom()
         
+        try? realm.write {
+          realm.add(self.dataSource)
+        }
+        print("==realm added weather")
         print(result)
       }, onError: { error in
         // TODO: Error handling, don't freeze app when error.

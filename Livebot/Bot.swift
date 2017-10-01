@@ -14,9 +14,15 @@ enum Bot {
   case weather(Request)
 }
 
-class APIai: Object {
-  dynamic var cityName = "Unknown"
-  dynamic var date = ""
+class DataSource: Object {
+  dynamic var text: String?
+  dynamic var weather: Weather?
+  dynamic var timeStamp = Date()
+}
+
+class APIai {
+  var cityName = "Unknown"
+  var date = ""
 }
 
 class Weather: Object {
@@ -24,7 +30,7 @@ class Weather: Object {
   dynamic var temperature = -1000
   dynamic var humidity = 0
   dynamic var icon = iconNameToChar(icon: "e")
-  dynamic var date = "Unknown"  
+  dynamic var date = "Unknown"
 }
 
 /**
