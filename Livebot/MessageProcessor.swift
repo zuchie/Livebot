@@ -18,6 +18,16 @@ enum MessageProcessorError: Error {
   //case invalidAddress
 }
 
+struct Request {
+  var baseURL: String
+  var url: URL {
+    return URL(string: baseURL)!
+  }
+  var pathComponent: String
+  var parameters: [String: String]
+  var headers: [String: String]
+}
+
 struct MessageProcessorResult {
   var date: Date?
   var placeName: String?
@@ -42,16 +52,28 @@ class MessageProcessor {
   }
   
   func doAPIaiNLP(_ text: String) -> Observable<MessageProcessorResult> {
-    var APIaiRequest = APIai.shared.request
+    let request = Request(
+      baseURL: "https://api.api.ai/v1",
+      pathComponent: "query",
+      parameters: [
+        "v": "20150910",
+        "lang": "en",
+        "sessionId": "1234567890",
+        "query": text
+      ],
+      headers: [
+        "Authorization": "Bearer 5e4ca032835746629ad895a8117de97b",
+        "Content-Type": "application/json"
+      ]
+    )
+    
     var results = MessageProcessorResult()
     
-    APIaiRequest.parameters["query"] = text
-    
     return APIController.shared.makeRequest(
-      baseURL: APIaiRequest.url,
-      pathComponent: APIaiRequest.pathComponent,
-      params: APIaiRequest.parameters,
-      headers: APIaiRequest.headers
+      baseURL: request.url,
+      pathComponent: request.pathComponent,
+      params: request.parameters,
+      headers: request.headers
     )
     .map { json in
       let params = json["result"]["parameters"]
@@ -101,15 +123,18 @@ class MessageProcessor {
       return .error(MessageProcessorError.queryBeyond(message, "weather"))
     }
     
-    var bot = Weather()
-    bot.request.pathComponent = path
-    bot.request.parameters = [
-      "q": place,
-      "appid": bot.request.apiKey,
-      "units": "metric"
-    ]
+    let request = Request(
+      baseURL: "http://api.openweathermap.org/data/2.5",
+      pathComponent: path,
+      parameters: [
+        "q": place,
+        "appid": "fdbfbda8ea64d823d88305440f63caf7",
+        "units": "metric"
+      ],
+      headers: [:]
+    )
     
-    return Observable.just(Bot.weather(bot))
+    return Observable.just(Bot.weather(request))
   }
   
   private func getDayDelta(_ firstDate: Date, _ secondDate: Date) -> Int {

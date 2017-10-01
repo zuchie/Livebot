@@ -16,8 +16,8 @@ struct ChatViewModel {
     return MessageProcessor.shared.process(message)
       .map { bot -> Request in
         switch bot {
-        case .weather(let requestBot):
-          return requestBot.request
+        case .weather(let request):
+          return request
         }
       }
       .flatMap { request in

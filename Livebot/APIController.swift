@@ -32,30 +32,7 @@ class APIController {
   ) -> Observable<JSON> {
     
     let url = baseURL.appendingPathComponent(pathComponent)
-    
-    /*
-    guard let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: true) else {
-      return .error(APIControllerError.invalidURLComponents)
-    }
-    
-
-    let queryItems = params.map { URLQueryItem(name: $0.0, value: $0.1) }
-    urlComponents.queryItems = queryItems
-    
-    var request = URLRequest(url: url)
-    guard let requestURL = urlComponents.url else {
-      return .error(APIControllerError.invalidURL)
-    }
-    request.url = requestURL
-    request.httpMethod = "GET"
-    for header in headers {
-      request.addValue(header.value, forHTTPHeaderField: header.key)
-    }
-    
-    return URLSession.shared.rx.data(request: request).map { JSON(data: $0) }
-    */
-    
-    
+        
     return data(.get, url, parameters: params, headers: headers)
       .map { JSON(data: $0) }
     

@@ -87,14 +87,13 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
       .observeOn(MainScheduler.instance)
       .subscribe(onNext: { result in
         // TODO: process json to tableView
-        let weather = Weather(
-          cityName: result["name"].string ?? "Unknown",
-          temperature: result["main"]["temp"].int ?? -1000,
-          humidity: result["main"]["humidity"].int ?? 0,
-          icon: result["weather"][0]["icon"].string ?? "e",
-          date: result["dt"].int?.dateFormat ?? "Unknown",
-          request: Request.empty
-        )
+        let weather = Weather()
+          weather.cityName = result["name"].string ?? "Unknown"
+          weather.temperature = result["main"]["temp"].int ?? -1000
+          weather.humidity = result["main"]["humidity"].int ?? 0
+          weather.icon = result["weather"][0]["icon"].string ?? "e"
+          weather.date = result["dt"].int?.dateFormat ?? "Unknown"
+          //weather.request = Request.empty
         
         self.dataSource.append(self.prepareDataSource(from: nil, weather))
         self.chatTableView.reloadData()

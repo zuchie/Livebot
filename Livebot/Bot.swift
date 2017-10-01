@@ -7,62 +7,24 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Request {
-  var baseURL: String
-  var url: URL {
-    return URL(string: baseURL)!
-  }
-  var apiKey: String
-  var pathComponent: String
-  var parameters: [String: String]
-  var headers: [String: String]
-  
-  static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [:], headers: [:])
-}
 
 enum Bot {
-  case weather(Weather)
+  case weather(Request)
 }
 
-class APIai {
-  static var shared = APIai()
-  
-  struct Result {
-    var cityName = "Unknown"
-    var date = ""
-  }
-  
-  var request = Request(
-    baseURL: "https://api.api.ai/v1",
-    apiKey: "",
-    pathComponent: "query",
-    parameters: [
-      "v": "20150910",
-      "lang": "en",
-      "sessionId": "1234567890"
-    ],
-    headers: [
-      "Authorization": "Bearer 5e4ca032835746629ad895a8117de97b",
-      "Content-Type": "application/json"
-    ]
-  )
+class APIai: Object {
+  dynamic var cityName = "Unknown"
+  dynamic var date = ""
 }
 
-struct Weather {
-  var cityName = "Unknown"
-  var temperature = -1000
-  var humidity = 0
-  var icon = iconNameToChar(icon: "e")
-  var date = "Unknown"
-  
-  var request = Request(
-    baseURL: "http://api.openweathermap.org/data/2.5",
-    apiKey: "fdbfbda8ea64d823d88305440f63caf7",
-    pathComponent: "",
-    parameters: [:],
-    headers: ["Content-Type": "application/json"]
-  )
+class Weather: Object {
+  dynamic var cityName = "Unknown"
+  dynamic var temperature = -1000
+  dynamic var humidity = 0
+  dynamic var icon = iconNameToChar(icon: "e")
+  dynamic var date = "Unknown"  
 }
 
 /**
