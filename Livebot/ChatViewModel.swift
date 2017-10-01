@@ -22,7 +22,6 @@ struct ChatViewModel {
       }
       .flatMap { request in
         return APIController.shared.makeRequest(
-          apiKey: request.apiKey,
           baseURL: request.url,
           pathComponent: request.pathComponent,
           params: request.parameters,

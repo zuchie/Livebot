@@ -15,10 +15,10 @@ struct Request {
   }
   var apiKey: String
   var pathComponent: String
-  var parameters: [(String, String)]
-  var headers: [(value: String, field: String)]
+  var parameters: [String: String]
+  var headers: [String: String]
   
-  static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [], headers: [])
+  static let empty = Request(baseURL: "", apiKey: "", pathComponent: "", parameters: [:], headers: [:])
 }
 
 enum Bot {
@@ -38,13 +38,13 @@ class APIai {
     apiKey: "",
     pathComponent: "query",
     parameters: [
-      ("v", "20150910"),
-      ("lang", "en"),
-      ("sessionId", "1234567890")
+      "v": "20150910",
+      "lang": "en",
+      "sessionId": "1234567890"
     ],
     headers: [
-      (value: "Bearer 5e4ca032835746629ad895a8117de97b", field: "Authorization"),
-      (value: "application/json", field: "Content-Type")
+      "Authorization": "Bearer 5e4ca032835746629ad895a8117de97b",
+      "Content-Type": "application/json"
     ]
   )
 }
@@ -60,8 +60,8 @@ struct Weather {
     baseURL: "http://api.openweathermap.org/data/2.5",
     apiKey: "fdbfbda8ea64d823d88305440f63caf7",
     pathComponent: "",
-    parameters: [],
-    headers: [(value: "application/json", field: "Content-Type")]
+    parameters: [:],
+    headers: ["Content-Type": "application/json"]
   )
 }
 

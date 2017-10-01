@@ -4,7 +4,7 @@ platform :ios, '10.0'
 pod 'RxSwift', '~> 3.6'
 pod 'RxRealm', '~> 0.6'
 pod 'SwiftyJSON', '~> 3.1.4'
-#pod 'RxAlamofire', '~> 3.0.3'
+pod 'RxAlamofire', '~> 3.0.3'
   
 target 'Livebot' do
   pod 'RxDataSources', '~> 1.0.3'

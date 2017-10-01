@@ -9,7 +9,6 @@
 import Foundation
 import CoreLocation
 import RxSwift
-import SwiftyJSON
 
 enum MessageProcessorError: Error {
   case unknownBot(String)
@@ -46,10 +45,9 @@ class MessageProcessor {
     var APIaiRequest = APIai.shared.request
     var results = MessageProcessorResult()
     
-    APIaiRequest.parameters.append(("query", text))
+    APIaiRequest.parameters["query"] = text
     
     return APIController.shared.makeRequest(
-      apiKey: APIaiRequest.apiKey,
       baseURL: APIaiRequest.url,
       pathComponent: APIaiRequest.pathComponent,
       params: APIaiRequest.parameters,
@@ -57,7 +55,6 @@ class MessageProcessor {
     )
     .map { json in
       let params = json["result"]["parameters"]
-      
       results.placeName = params["geo-city"].string
       
       // Convert from date string to Date
@@ -107,9 +104,9 @@ class MessageProcessor {
     var bot = Weather()
     bot.request.pathComponent = path
     bot.request.parameters = [
-      ("q", place),
-      ("appid", bot.request.apiKey),
-      ("units", "metric")
+      "q": place,
+      "appid": bot.request.apiKey,
+      "units": "metric"
     ]
     
     return Observable.just(Bot.weather(bot))
